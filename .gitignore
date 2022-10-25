@@ -1,0 +1,12 @@
+#Ignores all .exe files
+*.exe
+
+#And the "tempCodeRunnerFile" stuff
+tempCodeRunnerFile.*
+
+#Ignores all test files
+teste.*
+test.*
+
+README.md
+*.pdf
