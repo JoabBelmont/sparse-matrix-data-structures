@@ -34,7 +34,7 @@ private:
 public:
 	/* Inicializa a matriz para conter m linhas e n colunas,
 	 * além de checar se os parâmetros são > 0.
-	 * Caso contrário, lança uma excessão. */
+	 * Caso contrário, lança uma exceção. */
 	SparseMatrix(int m, int n);
 
 	/* Libera a memória alocada pela "SparseMatrix(int m, int n)" */
