@@ -3,21 +3,18 @@
  * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
  *          Iarley Natã Souza Lopes     | Matrícula:
  * @brief
- * Arquivo protóripo de um TAD de uma Matriz Esparsa.
- */
+ * Arquivo protóripo de um TAD de uma Matriz Esparsa. */
 
 #ifndef SPARSEMATRIX_H
 #define SPARSEMATRIX_H
 
 /* Estrutura nó da matriz */
 struct Node {
-private:
 	Node *right;    // Aponta para o próximo elemento não-nulo da linha
 	Node *down;     // Aponta para o próximo elemento não-nulo da coluna
 	int line;       // Dado da linha
 	int col;        // Dado da coluna
 	double value;   // Valor do elemento
-public:
 	/* Construtor que inicializa o nó com seus 5 parâmetros */
 	Node(Node *right, Node *down, int line, int col, double value) {
 		this->right = right;
@@ -30,6 +27,11 @@ public:
 
 /* TAD da matriz esparsa */
 class SparseMatrix {
+private:
+	Node *m_head { nullptr }; // Ponteiro inicial da matriz
+	int lineSize { 0 }; // Número de linhas da matriz
+	int colSize { 0 }; // Número de colunas da matriz
+public:
 	/* Inicializa a matriz para conter m linhas e n colunas,
 	 * além de checar se os parâmetros são > 0.
 	 * Caso contrário, lança uma excessão. */
