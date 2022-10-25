@@ -1,9 +1,9 @@
 /**
  * @file SparseMatrix.h
- * @authors Antonio Joabe Alves Morais	| Matrícula: 539029
- * 			Iarley Natã Souza Lopes		| Matrícula:
+ * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
+ *          Iarley Natã Souza Lopes     | Matrícula:
  * @brief
- * 		Arquivo protóripo de um TAD de uma Matriz Esparsa.
+ * Arquivo protóripo de um TAD de uma Matriz Esparsa.
  */
 
 #ifndef SPARSEMATRIX_H
@@ -12,11 +12,11 @@
 /* Estrutura nó da matriz */
 struct Node {
 private:
-	Node *right;	// Aponta para o próximo elemento não-nulo da linha
-	Node *down;		// Aponta para o próximo elemento não-nulo da coluna
-	int line;		// Dado da linha
-	int col;		// Dado da coluna
-	double value;	// Valor do elemento
+	Node *right;    // Aponta para o próximo elemento não-nulo da linha
+	Node *down;     // Aponta para o próximo elemento não-nulo da coluna
+	int line;       // Dado da linha
+	int col;        // Dado da coluna
+	double value;   // Valor do elemento
 public:
 	/* Construtor que inicializa o nó com seus 5 parâmetros */
 	Node(Node *right, Node *down, int line, int col, double value) {
