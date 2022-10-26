@@ -14,8 +14,8 @@
 class SparseMatrix {
 private:
 	Node *m_head { nullptr }; // Ponteiro inicial da matriz
-	int lineSize { 0 }; // Número de linhas da matriz
-	int colSize { 0 }; // Número de colunas da matriz
+	int lineQty { 0 }; // Número de linhas da matriz
+	int colQty { 0 }; // Número de colunas da matriz
 public:
 	/* Inicializa a matriz para conter m linhas e n colunas,
 	 * além de checar se os parâmetros são > 0.

@@ -22,28 +22,61 @@ SparseMatrix::SparseMatrix(int m, int n) {
 	Node *current = firstSentinel; // Ponteiro usado para percorrer os sentinelas nos for's seguintes
 
 	/* Inicializa os sentinelas das linhas */
-	for(int i = 1; i <= m; i++) {
+	for(int i = 1; i <= n; i++) {
 		/* Inicializa e "trata" os atributos do novo nó sentinela */
 		Node *sentinel = new Node(nullptr, nullptr, 0, 0, 0);
 		sentinel->line = i; // Atribui o número da linha
-		current->right = sentinel; // "Linka" o sentinela atual com o anterior
-		sentinel->right = firstSentinel; // Faz o ptr. right apontar para o início da linha
-		sentinel->down = sentinel; // E o ptr. down apontar para ele mesmo
-		current = current->right; // Anda o ptr atual
-		lineSize++; // Incrementa o número de linhas
+		current->down = sentinel; // "Linka" o sentinela atual com o anterior
+		sentinel->right = sentinel; // Faz o ptr. right apontar para ele mesmo
+		sentinel->down = firstSentinel; // E o ptr. down apontar para o início da coluna
+		current = current->down; // Anda o ptr atual
+		lineQty++; // Incrementa o número de linhas
 	}
 
 	current = firstSentinel; // Renicia o ptr
 
 	/* Inicializa os sentinelas das colunas */
-	for(int j = 1; j <= n; j++) {
+	for(int j = 1; j <= m; j++) {
 		/* Inicializa e "trata" os atributos do novo nó sentinela */
 		Node *sentinel = new Node(nullptr, nullptr, 0, 0, 0);
 		sentinel->col = j; // Atribui o número da coluna
-		current->down = sentinel; // "Linka" o sentinela atual com o anterior
-		sentinel->right = sentinel; // Faz o ptr. right apontar para ele mesmo
-		sentinel->down = firstSentinel; // E o ptr. down apontar para o início da coluna
-		current = current->down; // Anda o ptr atual
-		colSize++; // Incrementa o número de colunas
+		current->right = sentinel; // "Linka" o sentinela atual com o anterior
+		sentinel->right = firstSentinel; // Faz o ptr. right apontar para o início da linha
+		sentinel->down = sentinel; // E o ptr. down apontar para ele mesmo
+		current = current->right; // Anda o ptr atual
+		colQty++; // Incrementa o número de colunas
 	}
+}
+
+SparseMatrix::~SparseMatrix() {
+	Node *aux_line = m_head; 
+	/* Deleta os elementos a partir da coluna 1 */
+	while(aux_line->down != m_head) { 
+		while(aux_line->right != aux_line){
+			Node *aux_col = aux_line;
+			while (aux_col->right->right != aux_line){
+				aux_col = aux_col->right; // Anda na linha
+			}
+			delete aux_col->right; // Deleta o último elemento da linha
+			aux_col->right = aux_line; // Faz o penúltimo (agr último) apontar para o início
+		}
+		aux_line = aux_line->down; // Anda na coluna
+	}
+	/* Deleta os elementos da coluna 0 */
+	while(m_head->down != m_head) {
+		aux_line = m_head;
+		while(aux_line->down->down != m_head) {
+			aux_line = aux_line->down; // Anda na coluna 0
+		}
+		delete aux_line->down; // Deleta o último elemento da coluna
+		aux_line->down = m_head; // Faz o penúltimo (agr último) apontar para o início
+	}
+	delete m_head; // Deleta o primeiro sentinela (0, 0)
+	m_head = nullptr;
+	aux_line = nullptr;
+	lineQty = colQty = 0;
+}
+
+void SparseMatrix::print() {
+	
 }
