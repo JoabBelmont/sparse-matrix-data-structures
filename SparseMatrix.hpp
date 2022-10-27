@@ -1,12 +1,12 @@
 /**
- * @file SparseMatrix.h
+ * @file SparseMatrix.hpp
  * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
  *          Iarley Natã Souza Lopes     | Matrícula:
  * @brief
  * Arquivo protóripo de um TAD de uma Matriz Esparsa. */
 
-#ifndef SPARSEMATRIX_H
-#define SPARSEMATRIX_H
+#ifndef SPARSEMATRIX_HPP
+#define SPARSEMATRIX_HPP
 
 #include "Node.hpp"
 

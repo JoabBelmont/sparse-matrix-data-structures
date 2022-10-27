@@ -1,12 +1,12 @@
 /**
- * @file Node.h
+ * @file Node.hpp
  * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
  *          Iarley Natã Souza Lopes     | Matrícula:
  * @brief
  * Arquivo de implementação de uma struct de Nó. */
 
-#ifndef NODE_H
-#define NODE_H
+#ifndef NODE_HPP
+#define NODE_HPP
 
 /* Estrutura nó da matriz */
 struct Node {

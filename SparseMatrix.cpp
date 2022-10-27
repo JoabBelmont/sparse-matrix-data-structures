@@ -21,7 +21,7 @@ SparseMatrix::SparseMatrix(int m, int n) {
 	Node *current = firstSentinel; // Ponteiro usado para percorrer os sentinelas nos for's seguintes
 
 	/* Inicializa os sentinelas das linhas */
-	for(int i = 1; i <= n; i++) {
+	for(int i = 1; i <= m; i++) {
 		/* Inicializa e "trata" os atributos do novo nó sentinela */
 		Node *sentinel = new Node(nullptr, nullptr, 0, 0, 0);
 		sentinel->line = i; // Atribui o número da linha
@@ -35,7 +35,7 @@ SparseMatrix::SparseMatrix(int m, int n) {
 	current = firstSentinel; // Renicia o ptr
 
 	/* Inicializa os sentinelas das colunas */
-	for(int j = 1; j <= m; j++) {
+	for(int j = 1; j <= n; j++) {
 		/* Inicializa e "trata" os atributos do novo nó sentinela */
 		Node *sentinel = new Node(nullptr, nullptr, 0, 0, 0);
 		sentinel->col = j; // Atribui o número da coluna

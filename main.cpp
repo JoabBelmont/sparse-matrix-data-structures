@@ -1,8 +1,8 @@
 #include <iostream>
-#include "SparseMatrix.h"
+#include "SparseMatrix.hpp"
 
 int main() {
-	SparseMatrix *matrix = new SparseMatrix(10, 10);
+	SparseMatrix *matrix = new SparseMatrix(1, 3);
 	matrix->print();
 	delete matrix;
 
