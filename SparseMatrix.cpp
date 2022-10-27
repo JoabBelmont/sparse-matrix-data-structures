@@ -62,6 +62,7 @@ SparseMatrix::~SparseMatrix() {
 		}
 		aux_line = aux_line->down; // Anda na coluna
 	}
+
 	/* Deleta os elementos da coluna 0 */
 	while(m_head->down != m_head) {
 		aux_line = m_head;
@@ -71,12 +72,32 @@ SparseMatrix::~SparseMatrix() {
 		delete aux_line->down; // Deleta o último elemento da coluna
 		aux_line->down = m_head; // Faz o penúltimo (agr último) apontar para o início
 	}
+
 	delete m_head; // Deleta o primeiro sentinela (0, 0)
+
 	m_head = nullptr;
 	aux_line = nullptr;
 	lineQty = colQty = 0;
+
+	std::cout << "Matrix destructed";
 }
 
 void SparseMatrix::print() {
-	
+	Node *currentLine = m_head->down; // Aponta para o sentinela da linha
+	Node *currentCol = nullptr; // Vai apontar para os elementos da linha (colunas)
+	for(int i = 1; i <= lineQty; i++) {
+		currentCol = currentLine->right;
+		for(int j = 1; j <= colQty; j++) {
+			if((currentCol->line == i) && (currentCol->col = j)) {
+				std::cout << currentCol->value << " "; // Imprime o valor do elemento se ele existir
+			} else {
+				std::cout << "0" << " "; // Senão, imprime 0
+			}
+
+			if((currentCol->right == currentLine) && (currentCol->col == j)) {
+				currentLine = currentLine->down; // Anda a linha se chegar na última coluna
+			}
+		}
+		std::cout << std::endl;
+	}
 }
