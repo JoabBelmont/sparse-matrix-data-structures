@@ -90,6 +90,8 @@ void SparseMatrix::print() {
 		for(int j = 1; j <= colQty; j++) {
 			if((currentCol->line == i) && (currentCol->col = j)) {
 				std::cout << currentCol->value << " "; // Imprime o valor do elemento se ele existir
+				if(currentCol->right != currentLine) // Se não for o último elemento 
+					currentCol = currentCol->right; // Anda a coluna
 			} else {
 				std::cout << "0" << " "; // Senão, imprime 0
 			}

@@ -22,7 +22,7 @@ public:
 	 * Caso contrário, lança uma exceção. */
 	SparseMatrix(int m, int n);
 
-	/* Libera a memória alocada pela "SparseMatrix(int m, int n)" */
+	/* Libera a memória alocada pela "SparseMatrix(int m, int n)". */
 	~SparseMatrix();
 	
 	/**/
@@ -31,7 +31,7 @@ public:
 	/**/
 	double get(int i, int j);
 
-	/**/
+	/* Imprime a matriz. Se um nó não existir, imprime 0 no lugar */
 	void print();
 };
 
