@@ -103,3 +103,24 @@ void SparseMatrix::print() {
 		std::cout << std::endl;
 	}
 }
+
+double SparseMatrix::get(int i, int j) {
+	bool found;
+	if() {
+
+	}
+
+	if(i <= 0 || j <= 0 || i > lineQty || j > colQty)
+		throw std::invalid_argument("Invalid coordinate");
+	Node *currentLine = m_head->down;
+	
+	while(currentLine->line != i) { // Encontra a linha "i"
+		currentLine = currentLine->down;
+	}
+	Node *currentCol = currentLine->right;
+	while(currentCol->col != j) {
+		currentCol = currentCol->right;
+	}
+
+	return currentCol->value;
+}

@@ -11,3 +11,4 @@ test.*
 
 README.md
 *.pdf
+.vscode

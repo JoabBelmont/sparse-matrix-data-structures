@@ -28,7 +28,9 @@ public:
 	/**/
 	void insert(int i, int j, double value);
 
-	/**/
+	/* Retorna o valor do nó na posição (i, j)
+	* e checa se os parâmetros são válidos.
+	* Se não forem, lança uma exceção. */
 	double get(int i, int j);
 
 	/* Imprime a matriz. Se um nó não existir, imprime 0 no lugar */
