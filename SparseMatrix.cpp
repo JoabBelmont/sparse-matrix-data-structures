@@ -3,10 +3,9 @@
  * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
  *          Iarley Natã Souza Lopes     | Matrícula: 535779
  * @brief
- * Arquivo de implementação de um TAD de uma Matriz Esparsa.
- */
+ * Arquivo de implementação de um TAD de uma Matriz Esparsa. */
 
-#include "SparseMatrix.h"
+#include "SparseMatrix.hpp"
 #include <iostream>
 
 SparseMatrix::SparseMatrix(int m, int n) {
@@ -17,7 +16,7 @@ SparseMatrix::SparseMatrix(int m, int n) {
 	/* Primeiro sentinela: linha 0, coluna 0 */
 	Node * firstSentinel = new Node(nullptr, nullptr, 0, 0, 0);
 	m_head = firstSentinel; // Faz o nó cabeça apontar pra ele
-	firstSentinel->right = firstSentinel->down = firstSentinel; // E os ptrs. right e down apontarem para ele mesmo
+	firstSentinel->right = firstSentinel->down = firstSentinel; // E os ptrs. right e down do sentinela apontarem para ele mesmo
 
 	Node *current = firstSentinel; // Ponteiro usado para percorrer os sentinelas nos for's seguintes
 
@@ -88,16 +87,18 @@ void SparseMatrix::print() {
 	for(int i = 1; i <= lineQty; i++) {
 		currentCol = currentLine->right;
 		for(int j = 1; j <= colQty; j++) {
+			/* Imprime o valor do elemento se ele existir */
 			if((currentCol->line == i) && (currentCol->col = j)) {
-				std::cout << currentCol->value << " "; // Imprime o valor do elemento se ele existir
+				std::cout << currentCol->value << " "; 
 				if(currentCol->right != currentLine) // Se não for o último elemento 
 					currentCol = currentCol->right; // Anda a coluna
 			} else {
-				std::cout << "0" << " "; // Senão, imprime 0
+				std::cout << "0" << " "; // Senão existir, imprime 0
 			}
 
+			/* Anda a linha se chegar na última coluna e se  */
 			if((currentCol->right == currentLine) && (currentCol->col == j)) {
-				currentLine = currentLine->down; // Anda a linha se chegar na última coluna
+				currentLine = currentLine->down;
 			}
 		}
 		std::cout << std::endl;
@@ -105,22 +106,23 @@ void SparseMatrix::print() {
 }
 
 double SparseMatrix::get(int i, int j) {
-	bool found;
-	if() {
-
-	}
-
-	if(i <= 0 || j <= 0 || i > lineQty || j > colQty)
+	/* Lança uma exceção se a coordenada não for válida */
+	if(i <= 0 || j <= 0 || i > lineQty || j > colQty) 
 		throw std::invalid_argument("Invalid coordinate");
-	Node *currentLine = m_head->down;
-	
-	while(currentLine->line != i) { // Encontra a linha "i"
+
+	Node *currentLine = m_head->down; // Ponteiro que aponta para o início das linhas	
+	/* Encontra a linha "i" */
+	while(currentLine->line != i) {
 		currentLine = currentLine->down;
 	}
-	Node *currentCol = currentLine->right;
-	while(currentCol->col != j) {
-		currentCol = currentCol->right;
-	}
 
-	return currentCol->value;
+	Node *currentCol = currentLine->right; // Ponteiro que aponta para os nós na linha "i" 
+	/* Faz "currentCol" percorrer a linha "i" até que o nó(i, j) seja encontrado */
+	while(currentCol->col != j) { 
+		currentCol = currentCol->right;
+		if (currentCol->right == currentLine && currentCol->col != j){
+			return 0; // Se a lista foi percorrida e não foi encontrado o nó(i, j), retorna "0"
+		}
+	}
+	return currentCol->value; // Retorna "currentCol.value" se o nó(i, j) foi encontrado
 }
