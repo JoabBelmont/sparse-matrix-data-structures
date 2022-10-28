@@ -146,9 +146,44 @@ void SparseMatrix::insert(int i, int j, double value) {
 		currentCol = currentCol->right;
 	}
 
-	/* Se o nó(i, j) existir, só substitui o valor dele */
+	/* Se o nó(i, j) existir, substitui o valor dele ou desaloca */
 	if(currentCol->line == i && currentCol->col == j)
-		currentCol->value = value;
+		if(value != 0)
+			currentCol->value = value;
+		else {
+			currentCol = currentLine;
+			/* Anda a coluna até o mais próx da posição em que o nó(i, j) vai ser desalocado */
+			while(currentCol->right->col < j) { 
+				currentCol = currentCol->right;
+			}
+			/* Aponta o nó anterior ao (i, j) para o posterior ao (i, j) */
+			currentCol->right = currentCol->right->right;
+
+			/* Renicia os 2 ptrs. e encontra a coluna "j" */
+			currentLine = currentCol = m_head;
+			for(int n = 1; n <= j; n++) {
+				currentCol = currentCol->right;
+			}
+			currentLine = currentCol;
+
+			/* E faz a mesma coisa denovo, só que em relação à linha */
+			while(currentLine->down->line < i) {
+				currentLine = currentLine->down;
+			}
+			/* Aponta o nó anterior ao (i, j) para o posterior ao (i, j) */
+			currentLine->down = currentLine->down->down;
+
+			/* Encontra o nó(i, j) */
+			for(int m = 1; m <= i; m++) {
+				currentLine = currentLine->down;
+			}
+			currentCol = currentLine;
+			for(int n = 1; n <= j; n++) {
+				currentCol = currentCol->right;
+			}
+
+			delete currentCol; // E o desaloca
+		}
 	else {
 		currentCol = currentLine; // Renicia o ptr. da coluna
 
@@ -166,7 +201,7 @@ void SparseMatrix::insert(int i, int j, double value) {
 		}
 		currentLine = currentCol;
 
-		/* E faz a mesma coisa denovo, só que com a linha */
+		/* E faz a mesma coisa denovo, só que em relação à linha */
 		while(currentLine->down->line < i) {
 			currentLine = currentLine->down;
 		}
