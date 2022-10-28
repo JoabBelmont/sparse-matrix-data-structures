@@ -16,6 +16,7 @@ private:
 	Node *m_head { nullptr }; // Ponteiro inicial da matriz
 	int lineQty { 0 }; // Número de linhas da matriz
 	int colQty { 0 }; // Número de colunas da matriz
+
 public:
 	/* Inicializa a matriz para conter m linhas e n colunas,
 	 * além de checar se os parâmetros são > 0.
@@ -33,7 +34,7 @@ public:
 	* Se não forem, lança uma exceção. */
 	double get(int i, int j);
 
-	/* Imprime a matriz. Se um nó não existir, imprime 0 no lugar */
+	/* Imprime a matriz. Se um nó não existir, imprime "0" no lugar */
 	void print();
 };
 

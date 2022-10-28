@@ -15,10 +15,10 @@ SparseMatrix::SparseMatrix(int m, int n) {
 
 	/* Primeiro sentinela: linha 0, coluna 0 */
 	Node * firstSentinel = new Node(nullptr, nullptr, 0, 0, 0);
-	m_head = firstSentinel; // Faz o nó cabeça apontar pra ele
+	m_head = firstSentinel; // Faz o ptr. cabeça apontar pra ele
 	firstSentinel->right = firstSentinel->down = firstSentinel; // E os ptrs. right e down do sentinela apontarem para ele mesmo
 
-	Node *current = firstSentinel; // Ponteiro usado para percorrer os sentinelas nos for's seguintes
+	Node *current = firstSentinel; // Ptr. usado para percorrer os sentinelas nos for's seguintes
 
 	/* Inicializa os sentinelas das linhas */
 	for(int i = 1; i <= m; i++) {
@@ -28,11 +28,11 @@ SparseMatrix::SparseMatrix(int m, int n) {
 		current->down = sentinel; // "Linka" o sentinela atual com o anterior
 		sentinel->right = sentinel; // Faz o ptr. right apontar para ele mesmo
 		sentinel->down = firstSentinel; // E o ptr. down apontar para o início da coluna
-		current = current->down; // Anda o ptr atual
+		current = current->down; // Anda o ptr. atual
 		lineQty++; // Incrementa o número de linhas
 	}
 
-	current = firstSentinel; // Renicia o ptr
+	current = firstSentinel; // Renicia o ptr.
 
 	/* Inicializa os sentinelas das colunas */
 	for(int j = 1; j <= n; j++) {
@@ -42,7 +42,7 @@ SparseMatrix::SparseMatrix(int m, int n) {
 		current->right = sentinel; // "Linka" o sentinela atual com o anterior
 		sentinel->right = firstSentinel; // Faz o ptr. right apontar para o início da linha
 		sentinel->down = sentinel; // E o ptr. down apontar para ele mesmo
-		current = current->right; // Anda o ptr atual
+		current = current->right; // Anda o ptr. atual
 		colQty++; // Incrementa o número de colunas
 	}
 }
@@ -74,8 +74,7 @@ SparseMatrix::~SparseMatrix() {
 
 	delete m_head; // Deleta o primeiro sentinela (0, 0)
 
-	m_head = nullptr;
-	aux_line = nullptr;
+	m_head = aux_line = nullptr;
 	lineQty = colQty = 0;
 
 	std::cout << "Matrix destructed";
@@ -96,13 +95,15 @@ void SparseMatrix::print() {
 				std::cout << "0" << " "; // Senão existir, imprime 0
 			}
 
-			/* Anda a linha se chegar na última coluna e se  */
+			/* Anda a linha se chegar na última coluna e se o contador do for estiver sincronizado com a coluna */
 			if((currentCol->right == currentLine) && (currentCol->col == j)) {
 				currentLine = currentLine->down;
 			}
 		}
 		std::cout << std::endl;
 	}
+
+	currentLine = currentCol = nullptr;
 }
 
 double SparseMatrix::get(int i, int j) {
@@ -112,17 +113,64 @@ double SparseMatrix::get(int i, int j) {
 
 	Node *currentLine = m_head->down; // Ponteiro que aponta para o início das linhas	
 	/* Encontra a linha "i" */
-	while(currentLine->line != i) {
+	while(currentLine->line != i)
 		currentLine = currentLine->down;
-	}
 
 	Node *currentCol = currentLine->right; // Ponteiro que aponta para os nós na linha "i" 
 	/* Faz "currentCol" percorrer a linha "i" até que o nó(i, j) seja encontrado */
 	while(currentCol->col != j) { 
 		currentCol = currentCol->right;
-		if (currentCol->right == currentLine && currentCol->col != j){
-			return 0; // Se a lista foi percorrida e não foi encontrado o nó(i, j), retorna "0"
-		}
+		if (currentCol->right == currentLine && currentCol->col != j)
+			return 0; // Se a lista foi percorrida e o nó(i, j) não foi encontrado, retorna "0"
 	}
-	return currentCol->value; // Retorna "currentCol.value" se o nó(i, j) foi encontrado
+	return currentCol->value; // Se o nó(i, j) foi encontrado, retorna seu valor.
+}
+
+void SparseMatrix::insert(int i, int j, double value) {
+	/* Inicializa e "trata" os atributos do nó a ser inserido */
+	Node *newNode = new Node(nullptr, nullptr, 0, 0, 0);
+	newNode->line = i;
+	newNode->col = j;
+	newNode->value = value;
+	/* Inicializa os ptrs. que vão percorrer a matriz */
+	Node *currentLine = m_head;
+	Node *currentCol = m_head;
+
+	/* Encontra a linha "i" */
+	for(int m = 1; m <= i; m++) {
+		currentLine = currentLine->down;
+	}
+	currentCol = currentLine;
+	/* Encontra a coluna "j" */
+	for(int n = 1; n <= j; n++) {
+		currentCol = currentCol->right;
+	}
+
+	/* Se o nó(i, j) existir, só substitui o valor dele */
+	if(currentCol->line == i && currentCol->col == j)
+		currentCol->value = value;
+	else {
+		currentCol = currentLine; // Renicia o ptr. da coluna
+
+		/* Anda a coluna até o mais próx da posição em que o novo nó vai ser inserido */
+		while(currentCol->right->col < j) { 
+			currentCol = currentCol->right;
+		}
+		newNode->right = currentCol->right; // Faz o novo nó apontar para onde o nó anterior aponta
+		currentCol->right = newNode; // E o anterior apontar para onde o novo nó
+
+		/* Renicia os 2 ptrs. e encontra a coluna "j" */
+		currentLine = currentCol = m_head;
+		for(int n = 1; n <= j; n++) {
+			currentCol = currentCol->right;
+		}
+		currentLine = currentCol;
+
+		/* E faz a mesma coisa denovo, só que com a linha */
+		while(currentLine->down->line < i) {
+			currentLine = currentLine->down;
+		}
+		newNode->down = currentLine->down;
+		currentCol->down = newNode;
+	}
 }
