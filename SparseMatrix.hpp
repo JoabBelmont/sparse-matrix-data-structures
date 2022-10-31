@@ -26,7 +26,10 @@ public:
 	/* Libera a memória alocada pela "SparseMatrix(int m, int n)". */
 	~SparseMatrix();
 	
-	/**/
+	/* Insere um nó na posição (i, j) se não houver um nó lá.
+	 * Se houver, só substitui o valor dele.
+	 * Além disso, se o parametro "value" tiver valor "0",
+	 * desaloca o nó(i, j), se ele existir. */
 	void insert(int i, int j, double value);
 
 	/* Retorna o valor do nó na posição (i, j)
