@@ -94,7 +94,7 @@ void SparseMatrix::print() {
 double SparseMatrix::get(int i, int j) {
 	/* Lança uma exceção se a coordenada não for válida */
 	if(i <= 0 || j <= 0 || i > lineQty || j > colQty) 
-		throw std::invalid_argument("Invalid coordinate");
+		throw std::invalid_argument("Coordinates must be positive and within the matrix");
 
 	Node *currentLine = head->down; // Ponteiro que aponta para o início das linhas	
 	/* Encontra a linha "i" */
@@ -114,7 +114,7 @@ double SparseMatrix::get(int i, int j) {
 void SparseMatrix::insert(int i, int j, double value) {
 	/* Lança uma exceção se os parâmetros forem inválidos */
 	if(i <= 0 || j <= 0 || i > lineQty || j > colQty) 
-		throw std::invalid_argument("Invalid parameters");
+		throw std::invalid_argument("Coordinates must be positive and whitin the matrix");
 
 	/* Inicializa os ptrs. que vão percorrer a matriz */
 	Node *currentLine = head;

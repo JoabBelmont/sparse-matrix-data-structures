@@ -1,27 +1,19 @@
 #include <iostream>
+#include <fstream>
 #include "SparseMatrix.hpp"
 
 using namespace std;
 
+/* Soma 2 matrizes e retorna uma matriz resultado */
 SparseMatrix *sum(SparseMatrix *A, SparseMatrix *B);
+/* Multiplica 2 matrizes e retorna uma matriz resultado */
 SparseMatrix *multiply(SparseMatrix *A, SparseMatrix *B);
+/* Lê um arquivo .txt e monta uma matriz com base nos dados desse arquivo */
+SparseMatrix *readSparseMatrix(string fileName);
 
 int main() {
-	SparseMatrix *m1 = new SparseMatrix(2, 2);
-	SparseMatrix *m2 = new SparseMatrix(2, 2);
-
-	m1->insert(1, 1, 3);
-	m1->insert(1, 2, 4);
-	m1->insert(2, 1, 5);
-	m1->insert(2, 2, 1);
-	m1->print();
-
-	m2->insert(1, 1, 1);
-	m2->insert(2, 2, 1);
-	m2->print();
-
-	SparseMatrix *m3 = multiply(m1, m2);
-	m3->print();
+	SparseMatrix *A = readSparseMatrix("A.txt");
+	A->print();
 
 	return 0;
 }
@@ -73,7 +65,8 @@ SparseMatrix *multiply(SparseMatrix *A, SparseMatrix *B) {
 	Node *aux_lineA = A->getHead(); // Aponta para as linhas de A
 	Node *aux_colB = B->getHead();	// Aponta para as colunas de B
 
-	for(int i = 1; i <= A->getLineQty(); i++) { // Faz com que aux_lineA alterne entre as linhas de A
+	/* Faz com que aux_lineA alterne entre as linhas de A */
+	for(int i = 1; i <= A->getLineQty(); i++) { 
 		aux_lineA = aux_lineA->down;
 		
 		for(int j = 1; j <= B->getColQty(); j++) { // Faz com que aux_colB alterne entre as colunas de B
@@ -92,4 +85,29 @@ SparseMatrix *multiply(SparseMatrix *A, SparseMatrix *B) {
 	}
 
 	return C;
+}
+
+SparseMatrix *readSparseMatrix(string fileName) {
+	ifstream file;
+	int lineQty, colQty, i, j;
+	double value;
+
+	/* Abre o arquivo com o nome passado pelo parâmetro da função */
+	file.open(fileName);
+
+	/* Se não conseguir abrir o arquivo, lança uma exceção */
+	if(!file.is_open()) {
+		throw std::runtime_error("File not found");
+	}
+
+	/* Lê a quantidade de linhas e colunas da matriz */
+	file >> lineQty >> colQty;
+	SparseMatrix *matrix = new SparseMatrix(lineQty, colQty);
+
+	/* Lê as cordenadas, os valores e insere-os na matriz */
+	while(file >> i >> j >> value) {
+		matrix->insert(i, j, value);
+	}
+
+	return matrix;
 }
