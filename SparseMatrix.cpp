@@ -88,6 +88,7 @@ void SparseMatrix::print() {
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 double SparseMatrix::get(int i, int j) {
@@ -125,59 +126,50 @@ void SparseMatrix::insert(int i, int j, double value) {
 	currentCol = currentLine;
 
 	/* Se o nó(i, j) existir, substitui o valor dele ou desaloca */
-	if(get(i, j) != 0) {
-		//std::cout << "Entrou 1" << std::endl;
-
+	if(get(i, j)) {
 		if(value != 0) { // Substitui
 			while(currentCol->col != j)
 				currentCol = currentCol->right;
-			currentCol->value = value; // Certo
+			currentCol->value = value;
 		}
 		else { // Desaloca
-			Node *temp = nullptr;
+			/* Aponta para o nó a ser desalocado */
+			Node *temp = currentLine;
+			while(temp->col != j)
+				temp = temp->right;
 
-			/* Anda a coluna até o mais próx da posição em que o nó(i, j) vai ser desalocado */
-			while(currentCol->right->col < j) { 
-				if(currentCol->right == currentLine) // Se apontar para ele mesmo, para o loop.
+			/* Anda até o nó mais próximo ao nó(i, j) */
+			while(currentCol->right->col < j) {
+				if(currentCol->right == currentLine)
 					break;
 				currentCol = currentCol->right;
 			}
-			/* Aponta o nó anterior ao (i, j) para o posterior ao (i, j) */
-			currentCol = currentCol->right->right;
 
-			/* Renicia os 2 ptrs. e encontra a coluna "j" */
-			currentLine = currentCol = head;
-			for(int n = 1; n <= j; ++n) {
+			currentCol->right = temp->right; // Faz o nó anterior ao nó(i, j) apontar para o posterior ao mesmo
+			temp->right = nullptr;
+
+			currentLine = currentCol = head; // Renicia os ptrs.
+
+			for(int n = 1; n <= j; ++n) // Acha a coluna "j"
 				currentCol = currentCol->right;
-			}
 			currentLine = currentCol;
 
-			/* E faz a mesma coisa denovo, só que em relação à linha */
+			/* Faz a mesma coisa da linha 143, só que em relação à linha */
 			while(currentLine->down->line < i) {
-				if(currentLine->down == currentCol) // Se apontar para ele mesmo, para o loop.
+				if(currentLine->down == currentCol)
 					break;
 				currentLine = currentLine->down;
 			}
-			/* Aponta o nó anterior ao (i, j) para o posterior ao (i, j) */
-			currentLine = currentLine->down->down;
 
-			currentLine = currentCol = head;
+			currentLine->down = temp->down; // Faz a mesma coisa da linha 150, só que em relação à linha
+			temp->down = nullptr;
 
-			/* Encontra o nó(i, j) */
-			while(currentLine->line != i) {
-				currentLine = currentLine->down;
-			}
-			temp = currentLine;
-			while(temp->col != j) {
-				temp = temp->right;
-			}
-			temp->right = temp->down = nullptr;
-
-			delete temp; // E desaloca ele
+			delete temp; // Desaloca o nó(i, j)
 		}
 	}
-	else { // Insere o nó(i, j)
-		//std::cout << "Entrou 2" << std::endl;
+	else { // Insere
+		if(value == 0)
+			return;
 
 		/* Inicializa e "trata" os atributos do nó a ser inserido */
 		Node *newNode = new Node(nullptr, nullptr, 0, 0, 0);
@@ -201,7 +193,7 @@ void SparseMatrix::insert(int i, int j, double value) {
 		}
 		currentLine = currentCol;
 
-		/* E faz a mesma coisa denovo, só que em relação à linha */
+		/* E faz a mesma coisa da linha 180, só que em relação à linha */
 		while(currentLine->down->line < i) {
 			if(currentLine->down == currentCol)
 				break;
