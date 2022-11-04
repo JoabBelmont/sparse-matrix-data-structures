@@ -13,7 +13,7 @@
 /* TAD da matriz esparsa */
 class SparseMatrix {
 private:
-	Node *m_head { nullptr }; // Ponteiro inicial da matriz
+	Node *head { nullptr }; // Ponteiro inicial da matriz
 	int lineQty { 0 }; // Número de linhas da matriz
 	int colQty { 0 }; // Número de colunas da matriz
 
@@ -25,7 +25,8 @@ public:
 
 	/* Libera a memória alocada pela "SparseMatrix(int m, int n)". */
 	~SparseMatrix();
-	
+
+
 	/* Insere um nó na posição (i, j) se não houver um nó lá.
 	 * Se houver, só substitui o valor dele.
 	 * Além disso, se o parametro "value" tiver valor "0",
@@ -39,6 +40,10 @@ public:
 
 	/* Imprime a matriz. Se um nó não existir, imprime "0" no lugar */
 	void print();
+
+	Node *getHead();
+	int getLineQty();
+	int getColQty();
 };
 
 #endif
