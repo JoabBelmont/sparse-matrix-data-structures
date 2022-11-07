@@ -1,0 +1,66 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[brazilian]{babel}
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=20mm,
+	top=20mm,
+}
+\usepackage{csquotes}
+\usepackage{biblatex}
+\addbibresource{refs.bib}
+
+\title{\textbf{Projeto: Matrizes Esparsas}}
+\date{}
+\author{Antônio Joabe Alves Morais \\ Iarley Natã Souza Lopes}
+
+\begin{document}
+	% Descrição da estrutura: aplicações, motivação
+	% Tomada de decisões relaativas à implementação
+	% Como o trabalho foi dividido entre a dupla
+	% Dificuldades
+	% Testes executados
+	% Análise de complexidade da insert, get e sum
+	% Referências bibliográficas
+	\maketitle
+
+	\section{Descrição do Problema} \label{desc}
+		Uma matriz esparsa é uma matriz que tem mais valores nulos do que não nulos, ou seja, mais "zerados" do que "setados", ao contrário da matriz densa.
+
+		Quanto as aplicações da matriz esparsa, pode-se citar: \cite{Brownlee2018, UnivespME2016, Cerebras2019}
+		\begin{itemize}
+			\item Machine Learning;
+			\item Codificação de dados (Data Encoding);
+			\item Otimização de algoritmos;
+			\item Sistemas computacionais baseados em IA;
+			\item Entre várias outras aplicações.
+		\end{itemize}
+
+		Para representar uma matriz esparsa na programação, diversas técnicas e estruturas de dados podem ser aplicadas, nesse caso, no entanto, usaremos listas simplesmente encadeadas circulares.
+	\section{Decisões Tomadas} \label{decis}
+		Não fizemos muitas coisas que ficam fora do que foi proposto no documento inicial, o que implementamos foram 3 funções extras na \verb|SparseMatrix.cpp|:
+		\begin{itemize}
+			\item \verb|void getHead|: \\
+				retorna o atributo \verb|head|, declarado na \verb|SparseMatrix.hpp|;
+			\item \verb|void getLineQty|: \\
+				retorna o número de linhas da matriz;
+			\item \verb|void getColQty|: \\
+				retorna o número de colunas da matriz.
+		\end{itemize}
+
+		Também optamos por implementar uma \verb|main()| interativa, devidamente documentada na seção \ref{tests}.
+	\section{Divisão do Trabalho} \label{div}
+		A divisão do projeto foi sendo decidida no decorrer do projeto:
+		
+		Joabe ficou responsável pelas funções \verb|SparseMatrix()|(construtor)\verb|, insert(), print()| e \verb|readSparseMatrix()| \cite{ArquivosCFB2017, CppFilesShmeowlex2021}; e pela escrita deste documento \cite{LearnOverleaf2022}.
+
+		Iarley ficou responsável pelas funções \verb|~SparseMatrix()|(destrutor) \verb|, get(), sum()| e \\ \verb|multiply()|; e pela \verb|main()| interativa.
+	\section{Dificuldades} \label{difc}
+		Dentre as dificuldades que enfrentamos estão: saber implementar cada função da matriz; pensar em cada possibilidade de erro que uma certa implementação pode gerar; saber como ligar cada nó em diferentes situações; e comunicar de forma concisa e organizada cada caso e conceito, o que pode ser confuso às vezes.
+	\section{Testes Executados} \label{tests}
+	\section{Análise de Complexidade} \label{complx}
+
+	\pagebreak
+	\printbibliography
+\end{document}

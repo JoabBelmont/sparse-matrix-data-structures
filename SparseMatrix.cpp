@@ -80,36 +80,9 @@ SparseMatrix::~SparseMatrix() {
 	std::cout << "Matrix destructed";
 }
 
-
-void SparseMatrix::print() {
-	for(int i = 1; i <= lineQty; ++i) {
-		for(int j = 1; j <= colQty; ++j) {
-			std::cout << get(i, j) << " ";
-		}
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
-}
-
-double SparseMatrix::get(int i, int j) {
-	/* Lança uma exceção se a coordenada não for válida */
-	if(i <= 0 || j <= 0 || i > lineQty || j > colQty) 
-		throw std::invalid_argument("Coordinates must be positive and within the matrix");
-
-	Node *currentLine = head->down; // Ponteiro que aponta para o início das linhas	
-	/* Encontra a linha "i" */
-	while(currentLine->line != i)
-		currentLine = currentLine->down;
-
-	Node *currentCol = currentLine->right; // Ponteiro que aponta para os nós na linha "i" 
-	/* Faz "currentCol" percorrer a linha "i" até que o nó(i, j) seja encontrado */
-	while(currentCol->col != j) { 
-		currentCol = currentCol->right;
-		if(currentCol->right == currentLine && currentCol->col != j)
-			return 0; // Se a lista foi percorrida e o nó(i, j) não foi encontrado, retorna "0"
-	}
-	return currentCol->value; // Se o nó(i, j) foi encontrado, retorna seu valor.
-}
+Node *SparseMatrix::getHead() { return head; }
+int SparseMatrix::getLineQty() { return lineQty; }
+int SparseMatrix::getColQty() { return colQty; }
 
 void SparseMatrix::insert(int i, int j, double value) {
 	/* Lança uma exceção se os parâmetros forem inválidos */
@@ -204,6 +177,32 @@ void SparseMatrix::insert(int i, int j, double value) {
 	}
 }
 
-Node *SparseMatrix::getHead() { return head; }
-int SparseMatrix::getLineQty() { return lineQty; }
-int SparseMatrix::getColQty() { return colQty; }
+double SparseMatrix::get(int i, int j) {
+	/* Lança uma exceção se a coordenada não for válida */
+	if(i <= 0 || j <= 0 || i > lineQty || j > colQty) 
+		throw std::invalid_argument("Coordinates must be positive and within the matrix");
+
+	Node *currentLine = head->down; // Ponteiro que aponta para o início das linhas	
+	/* Encontra a linha "i" */
+	while(currentLine->line != i)
+		currentLine = currentLine->down;
+
+	Node *currentCol = currentLine->right; // Ponteiro que aponta para os nós na linha "i" 
+	/* Faz "currentCol" percorrer a linha "i" até que o nó(i, j) seja encontrado */
+	while(currentCol->col != j) { 
+		currentCol = currentCol->right;
+		if(currentCol->right == currentLine && currentCol->col != j)
+			return 0; // Se a lista foi percorrida e o nó(i, j) não foi encontrado, retorna "0"
+	}
+	return currentCol->value; // Se o nó(i, j) foi encontrado, retorna seu valor.
+}
+
+void SparseMatrix::print() {
+	for(int i = 1; i <= lineQty; ++i) {
+		for(int j = 1; j <= colQty; ++j) {
+			std::cout << get(i, j) << " ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}

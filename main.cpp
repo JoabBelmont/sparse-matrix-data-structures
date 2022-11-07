@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <sstream>
 #include <fstream>
 #include "SparseMatrix.hpp"
 
@@ -12,8 +14,75 @@ SparseMatrix *multiply(SparseMatrix *A, SparseMatrix *B);
 SparseMatrix *readSparseMatrix(string fileName);
 
 int main() {
-	SparseMatrix *A = readSparseMatrix("A.txt");
-	A->print();
+	vector<SparseMatrix*> matrices;
+
+	while(true) {
+		string command, token;
+		getline(cin, command);
+
+		stringstream ss;
+		ss << command;
+		ss >> token;
+
+		cout << "$" << ss.str() << endl;
+
+		if(token == "create") {
+			int line, col;
+			ss >> line >> col;
+			SparseMatrix *newMatrix = new SparseMatrix(line, col);
+			matrices.push_back(newMatrix);
+		}
+		else if(token == "insert") {
+			int line, col, index;
+			double value;
+			ss >> line >> col >> value >> index;
+			matrices[index]->insert(line, col, value);
+		}
+		else if(token == "get") {
+			int line, col, index;
+			ss >> line >> col >> index;
+			cout << matrices[index]->get(line, col) << endl;
+		}
+		else if(token == "show") {
+			int index;
+			ss >> index;
+			cout << "Matriz " << index << ":\n"; 
+			matrices[index]->print();
+		}
+		else if(token == "showall") {
+			for(int i = 0; i < matrices.size(); i++) {
+				cout << "Matriz " << i << ":"; 
+				matrices[i]->print();
+			}
+		}
+		else if(token == "sum") {
+			int m1, m2;
+			ss >> m1 >> m2;
+			SparseMatrix *newMatrix = sum(matrices[m1], matrices[m2]);
+			matrices.push_back(newMatrix);
+		}
+		else if(token == "multi") {
+			int m1, m2;
+			ss >> m1 >> m2;
+			SparseMatrix *newMatrix = multiply(matrices[m1], matrices[m2]);
+			matrices.push_back(newMatrix);
+		}
+		else if(token == "exit") {
+			for(int i = 0; i < matrices.size(); i++) {
+				delete matrices[i];
+			}
+			break;
+		}
+		else if(token == "read") {
+			string file;
+			ss >> file;
+			SparseMatrix *newMatrix = readSparseMatrix(file);
+			matrices.push_back(newMatrix);
+		}
+		else {
+			cout << "Unknown command, please enter another input:" << endl;
+		}
+	}
 
 	return 0;
 }
@@ -52,7 +121,7 @@ SparseMatrix *sum(SparseMatrix *A, SparseMatrix *B) {
 		auxLine = auxLine->down; // Faz com que auxLine aponte para a próx linha.
 	}
 
-	return C; // Retorna a matriz soma.
+	return C;
 }
 
 SparseMatrix *multiply(SparseMatrix *A, SparseMatrix *B) {
@@ -94,7 +163,6 @@ SparseMatrix *readSparseMatrix(string fileName) {
 
 	/* Abre o arquivo com o nome passado pelo parâmetro da função */
 	file.open(fileName);
-
 	/* Se não conseguir abrir o arquivo, lança uma exceção */
 	if(!file.is_open()) {
 		throw std::runtime_error("File not found");
@@ -103,7 +171,6 @@ SparseMatrix *readSparseMatrix(string fileName) {
 	/* Lê a quantidade de linhas e colunas da matriz */
 	file >> lineQty >> colQty;
 	SparseMatrix *matrix = new SparseMatrix(lineQty, colQty);
-
 	/* Lê as cordenadas, os valores e insere-os na matriz */
 	while(file >> i >> j >> value) {
 		matrix->insert(i, j, value);

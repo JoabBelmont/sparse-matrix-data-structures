@@ -1,4 +1,4 @@
-#Ignores all .exe files
+#Ignores all compiled files
 *.exe
 *.o
 
@@ -10,5 +10,4 @@ teste.*
 test.*
 
 README.md
-*.pdf
 .vscode
