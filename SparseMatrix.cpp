@@ -76,8 +76,6 @@ SparseMatrix::~SparseMatrix() {
 
 	head = aux_line = nullptr;
 	lineQty = colQty = 0;
-
-	std::cout << "Matrix destructed";
 }
 
 Node *SparseMatrix::getHead() { return head; }

@@ -1,6 +1,6 @@
-PWD c:\Users\joabb\DevStuff\college-cs\ed\sparse-matrix-data-structure\Report
+PWD c:\Users\joabb\OneDrive - Universidade Federal do Ceará\DevStuff\college-cs\ed\sparse-matrix-data-structure\Report
 INPUT C:\Users\joabb\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\joabb\DevStuff\college-cs\ed\sparse-matrix-data-structure\Report\Report.tex
+INPUT c:\Users\joabb\OneDrive - Universidade Federal do Ceará\DevStuff\college-cs\ed\sparse-matrix-data-structure\Report\Report.tex
 OUTPUT Report.log
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
@@ -91,6 +91,17 @@ INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.c
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\multirow\multirow.sty
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\csquotes\csquotes.sty
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\csquotes\csquotes.sty
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\tex\latex\csquotes\csquotes.sty
@@ -323,8 +334,6 @@ INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm120
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmtt12.tfm
 OUTPUT Report.pdf
 INPUT C:\Users\joabb\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
-INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmcsc10.tfm
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr6.tfm
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi12.tfm
@@ -333,6 +342,8 @@ INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi6.tfm
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy8.tfm
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmcsc10.tfm
 INPUT Report.aux
 INPUT Report.run.xml
 OUTPUT Report.run.xml
@@ -342,8 +353,14 @@ INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
 INPUT C:\Users\joabb\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt12.pfb

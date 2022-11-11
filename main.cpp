@@ -49,9 +49,9 @@ int main() {
 			cout << "Matriz " << index << ":\n"; 
 			matrices[index]->print();
 		}
-		else if(token == "showall") {
+		else if(token == "showAll") {
 			for(int i = 0; i < matrices.size(); i++) {
-				cout << "Matriz " << i << ":"; 
+				cout << "Matriz " << i << ":" << endl; 
 				matrices[i]->print();
 			}
 		}
@@ -61,7 +61,7 @@ int main() {
 			SparseMatrix *newMatrix = sum(matrices[m1], matrices[m2]);
 			matrices.push_back(newMatrix);
 		}
-		else if(token == "multi") {
+		else if(token == "mult") {
 			int m1, m2;
 			ss >> m1 >> m2;
 			SparseMatrix *newMatrix = multiply(matrices[m1], matrices[m2]);
@@ -131,25 +131,25 @@ SparseMatrix *multiply(SparseMatrix *A, SparseMatrix *B) {
 
 	SparseMatrix *C = new SparseMatrix(A->getLineQty(), B->getColQty());
 
-	Node *aux_lineA = A->getHead(); // Aponta para as linhas de A
-	Node *aux_colB = B->getHead();	// Aponta para as colunas de B
+	Node *auxLineA = A->getHead(); // Aponta para as linhas de A
+	Node *auxColB = B->getHead();	// Aponta para as colunas de B
 
-	/* Faz com que aux_lineA alterne entre as linhas de A */
-	for(int i = 1; i <= A->getLineQty(); i++) { 
-		aux_lineA = aux_lineA->down;
+	/* Faz com que auxLineA alterne entre as linhas de A */
+	for(int i = 1; i <= A->getLineQty(); i++) {
+		auxLineA = auxLineA->down;
 		
-		for(int j = 1; j <= B->getColQty(); j++) { // Faz com que aux_colB alterne entre as colunas de B
-			aux_colB = aux_colB->right;
-			Node *correA = aux_lineA->right; // Percorre as linhas de A
-			Node *correB = aux_colB->down;  // Percorre as colunas de B
-			static double soma = 0; // Guarda a soma dos produtos dos elementos das linhas e colunas de A e B
+		for(int j = 1; j <= B->getColQty(); j++) { // Faz com que auxColB alterne entre as colunas de B
+			auxColB = auxColB->right;
+			Node *currentA = auxLineA->right; // Percorre as linhas de A
+			Node *currentB = auxColB->down;  // Percorre as colunas de B
+			static double sum = 0; // Guarda a soma dos produtos dos elementos das linhas e colunas de A e B
 			for(int k = 1; k <= A->getColQty(); k++) { // Faz com que correA e correB percorram as linhas e colunas de A e B, respectivamente
-				soma = soma + A->get(i, k) * B->get(k, j);
-				correA = correA->right;
-				correB = correB->down;
+				sum = sum + A->get(i, k) * B->get(k, j);
+				currentA = currentA->right;
+				currentB = currentB->down;
 			}
-			C->insert(i, j, soma); // Insere o valor da soma no nó(i, j) de C
-			soma = 0;
+			C->insert(i, j, sum); // Insere o valor da soma no nó(i, j) de C
+			sum = 0;
 		}
 	}
 

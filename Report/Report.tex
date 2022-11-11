@@ -7,6 +7,7 @@
 	left=20mm,
 	top=20mm,
 }
+\usepackage{multirow}
 \usepackage{csquotes}
 \usepackage{biblatex}
 \addbibresource{refs.bib}
@@ -25,7 +26,7 @@
 	% Referências bibliográficas
 	\maketitle
 
-	\section{Descrição do Problema} \label{desc}
+	\section{Descrição do Problema} \label{descr}
 		Uma matriz esparsa é uma matriz que tem mais valores nulos do que não nulos, ou seja, mais "zerados" do que "setados", ao contrário da matriz densa.
 
 		Quanto as aplicações da matriz esparsa, pode-se citar: \cite{Brownlee2018, UnivespME2016, Cerebras2019}
@@ -53,14 +54,89 @@
 	\section{Divisão do Trabalho} \label{div}
 		A divisão do projeto foi sendo decidida no decorrer do projeto:
 		
-		Joabe ficou responsável pelas funções \verb|SparseMatrix()|(construtor)\verb|, insert(), print()| e \verb|readSparseMatrix()| \cite{ArquivosCFB2017, CppFilesShmeowlex2021}; e pela escrita deste documento \cite{LearnOverleaf2022}.
+		Joabe ficou responsável pelas funções \verb|SparseMatrix()|(construtor)\verb|, insert(), print()| e \verb|readSparseMatrix()| \cite{ArquivosCFB2017, CppFilesShmeowlex2021}; pela análise assintótica; e pela escrita deste documento \cite{LearnOverleaf2022}.
 
-		Iarley ficou responsável pelas funções \verb|~SparseMatrix()|(destrutor) \verb|, get(), sum()| e \\ \verb|multiply()|; e pela \verb|main()| interativa.
+		Iarley ficou responsável pelas funções \verb|~SparseMatrix()|(destrutor)\verb|, get(), sum()| e \\ \verb|multiply()|; e pela \verb|main()| interativa.
 	\section{Dificuldades} \label{difc}
-		Dentre as dificuldades que enfrentamos estão: saber implementar cada função da matriz; pensar em cada possibilidade de erro que uma certa implementação pode gerar; saber como ligar cada nó em diferentes situações; e comunicar de forma concisa e organizada cada caso e conceito, o que pode ser confuso às vezes.
+		Dentre as dificuldades que enfrentamos estão: saber implementar cada função da matriz; pensar em cada possibilidade de erro que uma certa implementação pode gerar; saber como ligar cada nó em diferentes situações; e comunicar de forma concisa e organizada cada caso e conceito, o que pode ser bem confuso.
 	\section{Testes Executados} \label{tests}
-	\section{Análise de Complexidade} \label{complx}
+		Como dito na seção \ref{decis}, foi implementado uma \verb|main()| interativa, que será documentada a seguir:
+		\begin{center}
+			\begin{tabular}{|p{4cm}||p{8cm}|}
+				\hline
+				\multicolumn{2}{|c|}{Comandos da Main Interativa} \\ \hline
+				\hline
+				\centering{\verb|create m n|}     & Cria uma matriz com $m$ linhas e $n$ colunas \\ \hline
+				\centering{\verb|insert i j x a|} & Insere um valor $x$ na posição $(i, j)$ na matriz $a$ \\ \hline
+				\centering{\verb|get i j a|}      & Retorna um valor inserido na posição $(i, j)$ na matriz $a$ \\ \hline
+				\centering{\verb|show a|}         & Mostra no terminal a matriz $a$ \\ \hline
+				\centering{\verb|showAll|}        & Mostra no terminal todas as matrizes existentes \\ \hline
+				\centering{\verb|sum a b|}        & Soma as matrizes $a$ e $b$ e cria uma matriz resultado \\ \hline
+				\centering{\verb|mult a b|}       & Multiplica as matrizes $a$ e $b$ e cria uma matriz resultado \\ \hline
+				\centering{\verb|read s|}*        & Lê um arquivo com nome $s$ (uma string, incluindo .txt) e cria uma matriz com os dados desse arquivo. \\ \hline
+				\centering{\verb|exit|}           & Desaloca todas as matrizes e encerra o programa \\ \hline
+			\end{tabular}
+			
+		\end{center}
+			*Quanto aos testes envolvendo arquivos, já existe um arquivo preenchido na pasta de projeto, chamado $A.txt$. Se o usuário quiser, ele pode modificá-lo e/ou até criar um novo arquivo, só tendo o cuidado de passar o nome correto ao chamar o comando \verb|read|.
+			\section{Análise de Complexidade} \label{complx}
+			Nessa análise na notação \emph{Big O}, vamos focar principalmente nas complexidades não constantes ($O(n), O(n^2)$...), pois as constantes não influenciam muito no tempo de execução, além de serem numerosas no programa.
+			\begin{itemize}
+				\item \verb|get()|:
+					\begin{quote}
+						Das linhas 180 a 183, temos complexidades constantes, dadas por uma condição e uma atribuição. $O(1)$.
 
+						Na linha 185, temos um laço \verb|while|, que percorre a lista até encontrar a linha passada por parâmetro. $O(n)$.
+
+						Depois, na linha 190, um laço \verb|while| percorre a lista até encontrar a coluna. $O(n)$.
+
+						\[O(n) + O(n) = 2 \times O(n)\]
+
+						Ignorando as constantes, temos $O(n)$.
+					\end{quote}
+
+				\item \verb|insert()|:
+					\begin{quote}
+						Nessa função, o pior caso vai acontecer quando for preciso desalocar um nó, que demanda percorrer a lista várias vezes para ajustar ponteiros e, finalmente, deletar o nó.
+
+						Primeiramente, temos o primeiro $O(n)$, na linha 94, um laço \verb|for| usado para encontrar a linha desejada.
+
+						Depois vamos para a linha 100, que faz chamada da função \verb|get()|, já analisada anteriormente. $O(n)$.
+
+						Ao entrar nessa condição, vamos para o \verb|else|, da linha 106, já que queremos desalocar, a fim de obter o pior caso. $O(1)$.
+
+						Temos na linha 109 um laço while. $O(n)$.
+						Na linha 113, temos um laço \verb|while|, que percorre a matrix até encontrar o nó anterior ao nó a ser desalocado. $O(n)$.
+
+						Na linha 124, um laço \verb|for| encontra a coluna passado por parâmetro. $O(n)$.
+
+						E o laço \verb|while| da linha 129 é análogo ao da linha 113. $O(n)$.
+
+						\[O(n) + O(n) + O(n) + O(n) + O(n) + O(n) = 6 \times O(n)\]
+
+						Portanto, temos $O(n)$.
+					\end{quote}
+
+				\item \verb|sum()|:
+					\begin{quote}
+						Nessa função, ocorre um aninhamento de complexidades não constantes. Por isso, essa análise será um pouco diferente das anteriores. 
+
+						Vamos começar do "núcleo" do primeiro while (linha 103): a linha 106.
+
+						Nela, ocorre a chamada da função \verb|get()|: $O(n)$, dentro da função \verb|insert()|: $O(n)$. O que dá a essa linha uma complexidade $O(n^2)$.
+
+						A linha 106 é executada $n$ vezes, pois está inserida num laço \verb|while|, o que eleva o nível de complexidade para $O(n^3)$.
+
+						E tudo isso está dentro de outro laço \verb|while|, que é executado $n$ vezes, o que eleva a complexidade para $O(n^4)$.
+
+						Depois a linha 113 faz um processo semelhante ao descrito anterior, executando a soma em si, ao contrário do bloco anterior, que executa uma cópia. $O(n^4)$.
+
+						\[ O(n^4) + O(n^4) = 2 \times O(n^4) \]
+
+						Portanto, temos $O(n^4)$.
+					\end{quote}
+
+			\end{itemize}
 	\pagebreak
 	\printbibliography
 \end{document}
