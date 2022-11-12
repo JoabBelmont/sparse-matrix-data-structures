@@ -14,7 +14,7 @@
 
 \title{\textbf{Projeto: Matrizes Esparsas}}
 \date{}
-\author{Antônio Joabe Alves Morais \\ Iarley Natã Souza Lopes}
+\author{Antônio Joabe Alves Morais \\ Iarley Natã Lopes Souza}
 
 \begin{document}
 	% Descrição da estrutura: aplicações, motivação
@@ -51,7 +51,7 @@
 		\end{itemize}
 
 		Também optamos por implementar uma \verb|main()| interativa, devidamente documentada na seção \ref{tests}.
-	\section{Divisão do Trabalho} \label{div}
+	\section{Divisão} \label{div}
 		A divisão do projeto foi sendo decidida no decorrer do projeto:
 		
 		Joabe ficou responsável pelas funções \verb|SparseMatrix()|(construtor)\verb|, insert(), print()| e \verb|readSparseMatrix()| \cite{ArquivosCFB2017, CppFilesShmeowlex2021}; pela análise assintótica; e pela escrita deste documento \cite{LearnOverleaf2022}.
@@ -80,12 +80,10 @@
 		\end{center}
 			*Quanto aos testes envolvendo arquivos, já existe um arquivo preenchido na pasta de projeto, chamado $A.txt$. Se o usuário quiser, ele pode modificá-lo e/ou até criar um novo arquivo, só tendo o cuidado de passar o nome correto ao chamar o comando \verb|read|.
 			\section{Análise de Complexidade} \label{complx}
-			Nessa análise na notação \emph{Big O}, vamos focar principalmente nas complexidades não constantes ($O(n), O(n^2)$...), pois as constantes não influenciam muito no tempo de execução, além de serem numerosas no programa.
+			Nessa análise na notação \emph{Big O}, vamos focar somente nas complexidades não constantes ($O(n), O(n^2)$...), pois as linhas com complexidade constante não influenciam no resultado final, além de serem numerosas no programa.
 			\begin{itemize}
 				\item \verb|get()|:
 					\begin{quote}
-						Das linhas 180 a 183, temos complexidades constantes, dadas por uma condição e uma atribuição. $O(1)$.
-
 						Na linha 185, temos um laço \verb|while|, que percorre a lista até encontrar a linha passada por parâmetro. $O(n)$.
 
 						Depois, na linha 190, um laço \verb|while| percorre a lista até encontrar a coluna. $O(n)$.
@@ -103,9 +101,10 @@
 
 						Depois vamos para a linha 100, que faz chamada da função \verb|get()|, já analisada anteriormente. $O(n)$.
 
-						Ao entrar nessa condição, vamos para o \verb|else|, da linha 106, já que queremos desalocar, a fim de obter o pior caso. $O(1)$.
+						Ao entrar nessa condição, vamos para o \verb|else|, da linha 106, já que queremos desalocar, a fim de obter o pior caso.
 
-						Temos na linha 109 um laço while. $O(n)$.
+						Temos na linha 109 um laço while que acha o nó a ser desalocado. $O(n)$.
+
 						Na linha 113, temos um laço \verb|while|, que percorre a matrix até encontrar o nó anterior ao nó a ser desalocado. $O(n)$.
 
 						Na linha 124, um laço \verb|for| encontra a coluna passado por parâmetro. $O(n)$.

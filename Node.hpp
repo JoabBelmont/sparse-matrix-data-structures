@@ -1,7 +1,7 @@
 /**
- * @file Node.hpp
+ * @file SparseMatrix.cpp
  * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
- *          Iarley Natã Souza Lopes     | Matrícula:
+ *          Iarley Natã Lopes Souza     | Matrícula: 535779
  * @brief
  * Arquivo de implementação de uma struct de Nó. */
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.10.7)  11 NOV 2022 17:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.7) (preloaded format=pdflatex 2022.10.7)  11 NOV 2022 20:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -423,7 +423,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 65.
  [2] [3]
-Overfull \hbox (12.21169pt too wide) in paragraph at lines 142--142
+Overfull \hbox (12.21169pt too wide) in paragraph at lines 141--141
 []\OT1/cmr/m/n/12 Overleaf. \OT1/cmr/m/it/12 Le-arn La-TeX in 30 mi-nu-tes - Over-leaf, On-line La-TeX Edi-tor\OT1/cmr/m/n/12 . Ac-ces-sed: 04/11/2022.
  []
 
@@ -441,7 +441,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  60i,9n,68p,797b,1624s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\joabb\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/joabb/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Report.pdf (4 pages, 121388 bytes).
+Output written on Report.pdf (4 pages, 121081 bytes).
 PDF statistics:
  60 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

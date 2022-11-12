@@ -1,7 +1,7 @@
 /**
- * @file SparseMatrix.hpp
+ * @file SparseMatrix.cpp
  * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
- *          Iarley Natã Souza Lopes     | Matrícula:
+ *          Iarley Natã Lopes Souza     | Matrícula: 535779
  * @brief
  * Arquivo protóripo de um TAD de uma Matriz Esparsa. */
 
@@ -10,7 +10,7 @@
 
 #include "Node.hpp"
 
-/* TAD da matriz esparsa */
+/* TAD da Matriz Esparsa */
 class SparseMatrix {
 private:
 	Node *head { nullptr }; // Ponteiro inicial da matriz
@@ -36,8 +36,7 @@ public:
 	void insert(int i, int j, double value);
 
 	/* Retorna o valor do nó na posição (i, j)
-	* e checa se os parâmetros são válidos.
-	* Se não forem, lança uma exceção. */
+	 * se o mesmo existir. Retorna "0" caso contrário. */
 	double get(int i, int j);
 
 	/* Imprime a matriz. Se um nó não existir, imprime "0" no lugar */

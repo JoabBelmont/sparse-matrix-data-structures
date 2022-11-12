@@ -1,7 +1,7 @@
 /**
  * @file SparseMatrix.cpp
  * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
- *          Iarley Natã Souza Lopes     | Matrícula: 535779
+ *          Iarley Natã Lopes Souza     | Matrícula: 535779
  * @brief
  * Arquivo de implementação de um TAD de uma Matriz Esparsa. */
 

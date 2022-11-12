@@ -1,3 +1,10 @@
+/**
+ * @file Node.hpp
+ * @authors Antonio Joabe Alves Morais  | Matrícula: 539029
+ *          Iarley Natã Lopes Souza     | Matrícula: 535779
+ * @brief
+ * Arquivo de testes e implementação de funções operacionais da matriz. */
+
 #include <iostream>
 #include <vector>
 #include <sstream>
